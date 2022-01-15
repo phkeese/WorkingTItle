@@ -14,6 +14,7 @@ health = 0.0
 
 [node name="Sync" type="Node" parent="."]
 script = ExtResource( 2 )
-synced = PoolStringArray( "max_interactions", "interactions" )
+synced = PoolStringArray( "max_interactions", "interactions", "_last_player" )
+process_only_network_master = true
 
 [connection signal="interacted_with" from="Station" to="." method="_on_Station_interacted_with"]
