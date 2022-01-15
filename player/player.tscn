@@ -13,6 +13,7 @@ resource_local_to_scene = true
 
 [node name="player" type="KinematicBody"]
 script = ExtResource( 2 )
+speed = 8.5
 
 [node name="Sync" type="Node" parent="."]
 script = ExtResource( 1 )
