@@ -37,7 +37,7 @@ func _on_Area_body_entered(body: Node) -> void:
 
 func _on_Area_body_exited(body: Node) -> void:
 	if body.is_in_group("myplayers"):
-		_in_range[body] = null
+		_in_range.erase(body)
 		body.disconnect("interacted", self, "_on_interacted")
 
 

@@ -1,16 +1,14 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://assets/models/platform_v2/platform_v2.tscn" type="PackedScene" id=1]
-[ext_resource path="res://scenes/producer_station.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/stations/wood_station.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/models/platform_v2/wing_l.glb" type="PackedScene" id=3]
 [ext_resource path="res://scripts/ship.gd" type="Script" id=4]
 [ext_resource path="res://assets/models/platform/platform_v2.glb" type="PackedScene" id=5]
 [ext_resource path="res://assets/models/stations/station_engine.glb" type="PackedScene" id=6]
 [ext_resource path="res://assets/models/stations/station_furnace.glb" type="PackedScene" id=7]
 [ext_resource path="res://assets/models/stations/station_watertower.glb" type="PackedScene" id=8]
-[ext_resource path="res://assets/models/stations/station_wood.glb" type="PackedScene" id=9]
 [ext_resource path="res://assets/models/platform_v2/propeller.glb" type="PackedScene" id=10]
-[ext_resource path="res://scenes/items/wood.tscn" type="PackedScene" id=11]
 
 [node name="Ship" type="Spatial"]
 script = ExtResource( 4 )
@@ -41,10 +39,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.00565, 7.15256e-07, 6.99061 
 [node name="station_watertower" parent="Stations" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.19713, 0, 17.4167 )
 
-[node name="station_wood" parent="Stations" instance=ExtResource( 9 )]
-transform = Transform( 0.7641, 0, -0.645098, 0, 1, 0, 0.645098, 0, 0.7641, 3.79711, 0, 21.5588 )
+[node name="Wood Station" parent="Stations" instance=ExtResource( 2 )]
+transform = Transform( -0.763131, 2.82482e-08, 0.646244, -2.82482e-08, 1, -7.70689e-08, -0.646244, -7.70689e-08, -0.763131, 3.94013, 0, 21.5386 )
 
-[node name="Wood Station" parent="Stations/station_wood" instance=ExtResource( 2 )]
-item_scene = ExtResource( 11 )
-
-[connection signal="give" from="Stations/station_wood/Wood Station" to="." method="_on_Wood_Station_give"]
+[connection signal="give" from="Stations/Wood Station" to="." method="_on_Wood_Station_give"]
