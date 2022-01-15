@@ -1,4 +1,4 @@
-extends StaticBody
+extends Spatial
 
 
 func _on_Wood_Station_give(to: Player, item_scene: PackedScene) -> void:
