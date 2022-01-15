@@ -15,5 +15,6 @@ material/0 = null
 [node name="Sync" type="Node" parent="."]
 script = ExtResource( 1 )
 initial = PoolStringArray( "color" )
+synced = PoolStringArray( "translation" )
 unreliable_synced = PoolStringArray( "position" )
 process_only_network_master = true
