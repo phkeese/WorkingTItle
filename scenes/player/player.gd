@@ -31,7 +31,9 @@ func _process(delta: float) -> void:
 
 
 remotesync func interacted() -> void:
-	emit_signal("interacted", self, item)
+	if get_tree().is_network_server():
+		print("player interacted with")
+		emit_signal("interacted", self, item)
 
 
 func set_color(c: Color):
