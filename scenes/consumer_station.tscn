@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scripts/consumer_station.gd" type="Script" id=1]
 [ext_resource path="res://scenes/station.tscn" type="PackedScene" id=3]
-[ext_resource path="res://assets/models/stations/station_engine.glb" type="PackedScene" id=4]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 2.95732, 1, 1.84686 )
@@ -10,9 +9,6 @@ extents = Vector3( 2.95732, 1, 1.84686 )
 [node name="Consumer Station" type="Spatial"]
 script = ExtResource( 1 )
 inputs = [ "wood" ]
-
-[node name="station_engine" parent="." instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.00565, 7.15256e-07, 6.99061 )
 
 [node name="Station" parent="." instance=ExtResource( 3 )]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 3.30405, 0, 7.42179 )

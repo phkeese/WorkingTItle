@@ -1,11 +1,11 @@
 [gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://assets/models/platform_v2/platform_v2.tscn" type="PackedScene" id=1]
-[ext_resource path="res://scenes/stations/consumer_station.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/stations/engine_station.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/models/platform_v2/wing_l.glb" type="PackedScene" id=3]
 [ext_resource path="res://scripts/ship.gd" type="Script" id=4]
 [ext_resource path="res://assets/models/platform/platform_v2.glb" type="PackedScene" id=5]
-[ext_resource path="res://assets/models/stations/station_furnace.glb" type="PackedScene" id=7]
+[ext_resource path="res://scenes/stations/furnace_station.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/models/stations/station_watertower.glb" type="PackedScene" id=8]
 [ext_resource path="res://assets/models/platform_v2/propeller.glb" type="PackedScene" id=10]
 [ext_resource path="res://scenes/stations/wood_station.tscn" type="PackedScene" id=11]
@@ -31,15 +31,18 @@ transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, -7.976, -4.76837e-07, 4.62314
 
 [node name="Stations" type="Spatial" parent="."]
 
-[node name="station_furnace" parent="Stations" instance=ExtResource( 7 )]
-
 [node name="station_watertower" parent="Stations" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.19713, 0, 17.4167 )
 
-[node name="Wood Station" parent="Stations" instance=ExtResource( 11 )]
+[node name="Wood" parent="Stations" instance=ExtResource( 11 )]
 transform = Transform( -0.763131, 2.82482e-08, 0.646244, -2.82482e-08, 1, -7.70689e-08, -0.646244, -7.70689e-08, -0.763131, 3.94013, 0, 21.5386 )
 
-[node name="Engine Station" parent="Stations" instance=ExtResource( 2 )]
-inputs = [ "wood" ]
+[node name="Furnace" parent="Stations" instance=ExtResource( 6 )]
+duration = 5.0
 
-[connection signal="give" from="Stations/Wood Station" to="." method="_on_Wood_Station_give"]
+[node name="Engine" parent="Stations" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.98211, 0, 6.81615 )
+fire_station = NodePath("../Furnace")
+boiler_station = NodePath("../Furnace")
+
+[connection signal="give" from="Stations/Wood" to="." method="_on_Wood_Station_give"]

@@ -18,3 +18,7 @@ func _on_Station_interacted_with(by: Player, item: Item) -> void:
 	if item and item.item_name in inputs:
 		add_item()
 		by.rpc("remove_item")
+
+
+func get_health() -> float:
+	return $Station.health as float

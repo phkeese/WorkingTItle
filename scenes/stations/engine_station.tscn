@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scripts/engine_station.gd" type="Script" id=1]
+[ext_resource path="res://addons/multiplayer/Sync.gd" type="Script" id=2]
+[ext_resource path="res://scenes/station.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/models/stations/station_engine.glb" type="PackedScene" id=4]
+
+[node name="Engine" type="Spatial"]
+script = ExtResource( 1 )
+
+[node name="Station" parent="." instance=ExtResource( 3 )]
+title = "Engine"
+
+[node name="Area" parent="Station" index="0"]
+collision_layer = 0
+collision_mask = 0
+
+[node name="Sync" type="Node" parent="."]
+script = ExtResource( 2 )
+synced = PoolStringArray( "speed" )
+
+[node name="station_engine" parent="." instance=ExtResource( 4 )]
+
+[editable path="Station"]
