@@ -27,7 +27,11 @@ func _physics_process(delta: float) -> void:
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("player_1_interact"):
-		emit_signal("interacted", self, item)
+		rpc("interacted")
+
+
+remotesync func interacted() -> void:
+	emit_signal("interacted", self, item)
 
 
 func set_color(c: Color):
