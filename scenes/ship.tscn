@@ -42,5 +42,4 @@ mesh = SubResource( 5 )
 material/0 = null
 
 [node name="Station" parent="." instance=ExtResource( 2 )]
-
-[connection signal="body_exited" from="Station" to="Station" method="_on_Station_body_exited"]
+title = "A Station"
