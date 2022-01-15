@@ -1,10 +1,13 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/game/game.gd" type="Script" id=1]
 [ext_resource path="res://addons/multiplayer/NetworkGame.gd" type="Script" id=2]
 [ext_resource path="res://scenes/player/player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/ship.tscn" type="PackedScene" id=4]
 [ext_resource path="res://addons/multiplayer/Sync.gd" type="Script" id=5]
+
+[sub_resource type="Curve" id=3]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 1.4, 0.0, 0, 0 ]
 
 [sub_resource type="SpatialMaterial" id=2]
 albedo_color = Color( 1, 0, 0, 1 )
@@ -20,7 +23,9 @@ players_container = NodePath("game/Players")
 
 [node name="game" type="Spatial" parent="."]
 script = ExtResource( 1 )
+max_angle = 45.0
 player_weight = 10.0
+tilt_curve = SubResource( 3 )
 
 [node name="Ship" parent="game" instance=ExtResource( 4 )]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0 )
