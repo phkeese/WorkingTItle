@@ -42,7 +42,7 @@ func set_color(c: Color):
 func _set_item(new_item: Spatial) -> void:
 	if item:
 		pass
-	else:
+	elif new_item:
 		item = new_item
 		add_child(item)
 		item.global_transform = $Hands.global_transform
