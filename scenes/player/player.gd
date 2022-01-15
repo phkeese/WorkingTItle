@@ -1,4 +1,5 @@
 extends KinematicBody
+signal interacted(player)
 
 var color setget set_color
 export var speed := 1.0
@@ -18,6 +19,11 @@ func _physics_process(delta: float) -> void:
 	var up := Input.get_action_strength("player_1_up") - Input.get_action_strength("player_1_down")
 	var movement := Vector3.RIGHT * right + Vector3.FORWARD * up + Vector3.DOWN * gravity
 	move_and_slide(movement * speed, Vector3.UP, true)
+
+
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("player_1_interact"):
+		emit_signal("interacted", self)
 
 
 func set_color(c: Color):
