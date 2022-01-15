@@ -22,6 +22,4 @@ func _process(delta: float) -> void:
 
 func set_color(c: Color):
 	color = c
-	var mat := SpatialMaterial.new()
-	mat.albedo_color = color
-	$MeshInstance.material_override = mat
+	$char_v1.tint = color
