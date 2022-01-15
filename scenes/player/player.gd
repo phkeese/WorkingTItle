@@ -47,5 +47,9 @@ func _set_item(new_item: Spatial) -> void:
 		item = new_item
 		item.global_transform = $Hands.global_transform
 		add_child(item)
-		item.global_transform = $Hands.global_transform
+		item.global_transform = $Hands.global_transform		
 
+
+remotesync func remove_item() -> void:
+	if item:
+		item.get_node("Sync").remove()
