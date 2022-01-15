@@ -20,9 +20,6 @@ func _physics_process(delta: float) -> void:
 	move_and_slide(movement * speed, Vector3.UP, true)
 
 
-	
-
-
 func set_color(c: Color):
 	color = c
 	$char_v1.tint = color
