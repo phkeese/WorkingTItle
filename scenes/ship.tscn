@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://assets/models/platform_v2/platform_v2.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/stations/engine_station.tscn" type="PackedScene" id=2]
@@ -6,9 +6,25 @@
 [ext_resource path="res://scripts/ship.gd" type="Script" id=4]
 [ext_resource path="res://assets/models/platform/platform_v2.glb" type="PackedScene" id=5]
 [ext_resource path="res://scenes/stations/furnace_station.tscn" type="PackedScene" id=6]
-[ext_resource path="res://assets/models/stations/station_watertower.glb" type="PackedScene" id=8]
+[ext_resource path="res://scenes/stations/water_station.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/consumer_station.tscn" type="PackedScene" id=8]
 [ext_resource path="res://assets/models/platform_v2/propeller.glb" type="PackedScene" id=10]
 [ext_resource path="res://scenes/stations/wood_station.tscn" type="PackedScene" id=11]
+
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 1.83711, 1, 1.78845 )
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 1.0657, 1, 1.12747 )
+
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 1.16397, 1.47841, 3.26964 )
+
+[sub_resource type="BoxShape" id=5]
+extents = Vector3( 3.04125, 1.47841, 2.94483 )
+
+[sub_resource type="BoxShape" id=4]
+extents = Vector3( 1.67674, 1, 2.48667 )
 
 [node name="Ship" type="Spatial"]
 script = ExtResource( 4 )
@@ -31,18 +47,55 @@ transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, -7.976, -4.76837e-07, 4.62314
 
 [node name="Stations" type="Spatial" parent="."]
 
-[node name="station_watertower" parent="Stations" instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.19713, 0, 17.4167 )
-
 [node name="Wood" parent="Stations" instance=ExtResource( 11 )]
 transform = Transform( -0.763131, 2.82482e-08, 0.646244, -2.82482e-08, 1, -7.70689e-08, -0.646244, -7.70689e-08, -0.763131, 3.94013, 0, 21.5386 )
 
+[node name="StaticBody" type="StaticBody" parent="Stations/Wood"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Stations/Wood/StaticBody"]
+transform = Transform( 1, -3.55271e-15, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+shape = SubResource( 2 )
+
 [node name="Furnace" parent="Stations" instance=ExtResource( 6 )]
-duration = 5.0
+max_items = 2
+
+[node name="Boiler" parent="Stations/Furnace" instance=ExtResource( 8 )]
+inputs = [ "water" ]
+max_items = 2
+
+[node name="Station" parent="Stations/Furnace/Boiler" index="0"]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -5.86125, 0, 2.21626 )
+title = "Boiler"
+
+[node name="CollisionShape" parent="Stations/Furnace/Boiler/Station/Area" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.210462, 3.54434, 0 )
+shape = SubResource( 1 )
+
+[node name="StaticBody2" type="StaticBody" parent="Stations/Furnace"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.90735, 1.03737, 0.552314 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Stations/Furnace/StaticBody2"]
+transform = Transform( 1, -3.55271e-15, 0, 0, 1, 0, 0, 0, 1, 0, 0.0818039, 1.58744 )
+shape = SubResource( 3 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="Stations/Furnace/StaticBody2"]
+transform = Transform( -4.37114e-08, 1.55294e-22, -1, 0, 1, 0, 1, -3.55271e-15, -4.37114e-08, 0.140045, -0.124634, -4.15451 )
+shape = SubResource( 5 )
+
+[node name="Ramp" type="CollisionShape" parent="Stations/Furnace/StaticBody2"]
+transform = Transform( 1, 0, 0, 0, 0.866025, -0.5, 0, 0.5, 0.866025, -0.532178, -0.527652, 6.46755 )
+shape = SubResource( 4 )
 
 [node name="Engine" parent="Stations" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.98211, 0, 6.81615 )
 fire_station = NodePath("../Furnace")
 boiler_station = NodePath("../Furnace")
 
-[connection signal="give" from="Stations/Wood" to="." method="_on_Wood_Station_give"]
+[node name="Water" parent="Stations" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.20975, 0, 17.4286 )
+
+[connection signal="give" from="Stations/Wood" to="." method="_on_give"]
+[connection signal="give" from="Stations/Water" to="." method="_on_give"]
+
+[editable path="Stations/Furnace/Boiler"]
+[editable path="Stations/Furnace/Boiler/Station"]

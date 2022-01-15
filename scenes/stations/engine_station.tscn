@@ -1,9 +1,12 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scripts/engine_station.gd" type="Script" id=1]
 [ext_resource path="res://addons/multiplayer/Sync.gd" type="Script" id=2]
 [ext_resource path="res://scenes/station.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/models/stations/station_engine.glb" type="PackedScene" id=4]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 1.39694, 1, 3.87288 )
 
 [node name="Engine" type="Spatial"]
 script = ExtResource( 1 )
@@ -20,5 +23,13 @@ script = ExtResource( 2 )
 synced = PoolStringArray( "speed" )
 
 [node name="station_engine" parent="." instance=ExtResource( 4 )]
+
+[node name="StaticBody" type="StaticBody" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.019268, 0, 2.02315 )
+shape = SubResource( 1 )
 
 [editable path="Station"]

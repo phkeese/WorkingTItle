@@ -24,7 +24,7 @@ players_container = NodePath("game/Players")
 [node name="game" type="Spatial" parent="."]
 script = ExtResource( 1 )
 max_angle = 45.0
-player_weight = 10.0
+player_weight = 3.0
 tilt_curve = SubResource( 3 )
 
 [node name="Ship" parent="game" instance=ExtResource( 4 )]
@@ -32,6 +32,7 @@ transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0
 
 [node name="MeshInstance" type="MeshInstance" parent="game"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.0173, 0 )
+visible = false
 material_override = SubResource( 2 )
 mesh = SubResource( 1 )
 material/0 = null
@@ -43,9 +44,10 @@ unreliable_synced = PoolStringArray( "global_transform" )
 [node name="Players" type="Spatial" parent="game"]
 
 [node name="CameraContainer" type="Spatial" parent="game"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.852, 0, 0 )
 
 [node name="Camera" type="Camera" parent="game/CameraContainer"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 28.1227, 32.7664, 0 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 23.9463, 27.097, 0 )
 
 [node name="Sync" type="Node" parent="game"]
 script = ExtResource( 5 )
