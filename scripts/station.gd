@@ -3,6 +3,12 @@ extends Spatial
 
 export var title := "Station" setget _set_title
 export(float, 0.0, 1.0) var health := 1.0 setget _set_health
+export var ui_offset := 1.0
+
+
+func _process(delta: float) -> void:
+	var screen_position := get_viewport().get_camera().unproject_position(global_transform.origin + Vector3.UP * ui_offset)
+	$HUD/VBoxContainer.rect_position = screen_position
 
 
 func damage(amount: float) -> void:
