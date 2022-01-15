@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/models/char_v1/char_v1.gd" type="Script" id=1]
+[ext_resource path="res://assets/models/char_v1/char_v1.glb" type="PackedScene" id=2]
+
+[node name="char_v1" instance=ExtResource( 2 )]
+script = ExtResource( 1 )
