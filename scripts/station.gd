@@ -30,13 +30,13 @@ func _set_health(new_health: float) -> void:
 
 
 func _on_Area_body_entered(body: Node) -> void:
-	if body.is_in_group("players"):
+	if body.is_in_group("myplayers"):
 		_in_range[body] = body
 		body.connect("interacted", self, "_on_interacted")
 
 
 func _on_Area_body_exited(body: Node) -> void:
-	if body.is_in_group("players"):
+	if body.is_in_group("myplayers"):
 		_in_range[body] = null
 		body.disconnect("interacted", self, "_on_interacted")
 

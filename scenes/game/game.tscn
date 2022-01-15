@@ -7,7 +7,8 @@
 
 [node name="NetworkGame" type="Node"]
 script = ExtResource( 2 )
-ip = "10.1.1.25"
+port = 2455
+ip = "gamedev.paulmethfessel.com"
 player_scene = ExtResource( 3 )
 
 [node name="game" type="Spatial" parent="."]
