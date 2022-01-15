@@ -3,7 +3,7 @@ extends KinematicBody
 signal interacted(player, item)
 
 export var speed := 1.0
-export var gravity := 9.8
+export var gravity := 9.81
 
 
 var color setget set_color
@@ -44,3 +44,5 @@ func _set_item(new_item: Spatial) -> void:
 		pass
 	else:
 		item = new_item
+		add_child(item)
+		item.global_transform = $Hands.global_transform
