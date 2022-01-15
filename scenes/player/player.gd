@@ -1,10 +1,13 @@
 class_name Player
 extends KinematicBody
-signal interacted(player)
+signal interacted(player, item)
 
 var color setget set_color
 export var speed := 1.0
 export var gravity := 9.8
+
+
+var _item : Spatial
 
 
 func _network_ready(is_source):
@@ -24,7 +27,7 @@ func _physics_process(delta: float) -> void:
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("player_1_interact"):
-		emit_signal("interacted", self)
+		emit_signal("interacted", self, _item)
 
 
 func set_color(c: Color):

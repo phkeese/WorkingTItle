@@ -2,7 +2,7 @@
 
 [ext_resource path="res://scenes/station.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/multiplayer/Sync.gd" type="Script" id=2]
-[ext_resource path="res://scripts/wood_station.gd" type="Script" id=3]
+[ext_resource path="res://scripts/producer_station.gd" type="Script" id=3]
 
 [node name="Wood Station" type="Spatial"]
 script = ExtResource( 3 )

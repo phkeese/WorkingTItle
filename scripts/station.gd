@@ -1,5 +1,5 @@
 extends Spatial
-signal interacted_with(by)
+signal interacted_with(by, item)
 
 
 export var title := "Station" setget _set_title
@@ -41,5 +41,5 @@ func _on_Area_body_exited(body: Node) -> void:
 		body.disconnect("interacted", self, "_on_interacted")
 
 
-func _on_interacted(by: Node) -> void:
-	emit_signal("interacted_with", by)
+func _on_interacted(by: Node, item: Node) -> void:
+	emit_signal("interacted_with", by, item)
