@@ -9,6 +9,7 @@ export var ui_offset := 1.0
 func _process(delta: float) -> void:
 	var screen_position := get_viewport().get_camera().unproject_position(global_transform.origin + Vector3.UP * ui_offset)
 	$HUD/VBoxContainer.rect_position = screen_position
+	damage(0.1 * delta)
 
 
 func damage(amount: float) -> void:
