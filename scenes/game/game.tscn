@@ -8,7 +8,6 @@
 [node name="NetworkGame" type="Node"]
 script = ExtResource( 2 )
 port = 2455
-ip = "gamedev.paulmethfessel.com"
 player_scene = ExtResource( 3 )
 
 [node name="game" type="Spatial" parent="."]
@@ -18,3 +17,4 @@ script = ExtResource( 1 )
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 28.1227, 32.7664, 0 )
 
 [node name="Ship" parent="game" instance=ExtResource( 4 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0 )
