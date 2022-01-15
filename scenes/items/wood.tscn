@@ -5,7 +5,7 @@
 
 [sub_resource type="CubeMesh" id=1]
 
-[node name="Spatial" type="Spatial"]
+[node name="Wood" type="Spatial"]
 script = ExtResource( 2 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
