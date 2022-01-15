@@ -53,3 +53,4 @@ func _set_item(new_item: Spatial) -> void:
 remotesync func remove_item() -> void:
 	if item:
 		item.get_node("Sync").remove()
+		item = null
