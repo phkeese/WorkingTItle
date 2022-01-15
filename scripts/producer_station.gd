@@ -24,4 +24,5 @@ func _set_interactions(new: int) -> void:
 
 
 func _on_Station_interacted_with(by: Player, item: Spatial) -> void:
+	print_debug("player %s used a %s on %s" % [by, item, self])
 	interact(by)

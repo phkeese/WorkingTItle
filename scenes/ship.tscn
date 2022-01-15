@@ -46,3 +46,5 @@ transform = Transform( 0.7641, 0, -0.645098, 0, 1, 0, 0.645098, 0, 0.7641, 3.797
 
 [node name="Wood Station" parent="Stations/station_wood" instance=ExtResource( 2 )]
 item_scene = ExtResource( 11 )
+
+[connection signal="give" from="Stations/station_wood/Wood Station" to="." method="_on_Wood_Station_give"]
