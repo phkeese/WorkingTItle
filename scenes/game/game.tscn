@@ -1,20 +1,41 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/game/game.gd" type="Script" id=1]
 [ext_resource path="res://addons/multiplayer/NetworkGame.gd" type="Script" id=2]
 [ext_resource path="res://scenes/player/player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/ship.tscn" type="PackedScene" id=4]
+[ext_resource path="res://addons/multiplayer/Sync.gd" type="Script" id=5]
+
+[sub_resource type="SpatialMaterial" id=2]
+albedo_color = Color( 1, 0, 0, 1 )
+
+[sub_resource type="SphereMesh" id=1]
 
 [node name="NetworkGame" type="Node"]
 script = ExtResource( 2 )
 port = 2455
 player_scene = ExtResource( 3 )
+players_container = NodePath("game/Players")
 
 [node name="game" type="Spatial" parent="."]
 script = ExtResource( 1 )
 
-[node name="Camera" type="Camera" parent="game"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 28.1227, 32.7664, 0 )
-
 [node name="Ship" parent="game" instance=ExtResource( 4 )]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0 )
+
+[node name="MeshInstance" type="MeshInstance" parent="game"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.0173, 0 )
+material_override = SubResource( 2 )
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="Sync" type="Node" parent="game/MeshInstance"]
+script = ExtResource( 5 )
+unreliable_synced = PoolStringArray( "global_transform" )
+
+[node name="Players" type="Spatial" parent="game"]
+
+[node name="CameraContainer" type="Spatial" parent="game"]
+
+[node name="Camera" type="Camera" parent="game/CameraContainer"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 28.1227, 32.7664, 0 )
