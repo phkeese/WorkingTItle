@@ -10,6 +10,10 @@ export var ui_offset := 1.0
 var _in_range := {}
 
 
+func _ready() -> void:
+	self.health = health
+
+
 func _process(delta: float) -> void:
 	var screen_position := get_viewport().get_camera().unproject_position(global_transform.origin + Vector3.UP * ui_offset)
 	var vbox := $HUD/VBoxContainer as Control

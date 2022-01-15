@@ -6,9 +6,14 @@
 
 [node name="Wood Station" type="Spatial"]
 script = ExtResource( 3 )
+max_interactions = 3
 
 [node name="Station" parent="." instance=ExtResource( 1 )]
 title = "Firewood"
+health = 0.0
 
 [node name="Sync" type="Node" parent="."]
 script = ExtResource( 2 )
+synced = PoolStringArray( "max_interactions", "interactions" )
+
+[connection signal="interacted_with" from="Station" to="." method="_on_Station_interacted_with"]
