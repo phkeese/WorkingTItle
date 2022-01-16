@@ -8,6 +8,7 @@ export var max_distance := 6.0
 export var tilt_curve : Curve
 export var max_pitch := 20.0
 export var height := 100.0 setget _set_height
+export var game_time := 0.0 setget _set_game_time
 
 
 func _ready() -> void:
@@ -35,6 +36,7 @@ func _process(delta: float) -> void:
 	$CameraContainer.rotation_degrees.z = max_pitch * (1.1 - speed)
 	
 	self.height -= (0.9 - speed) / 10.0
+	self.game_time += delta
 
 
 func _set_angle(new_angle: float) -> void:
@@ -47,3 +49,8 @@ func _set_height(new_height: float) -> void:
 	height = clamp(new_height, 0.0, 100.0)
 	$HUD/PanelContainer/VBoxContainer/Height.value = new_height
 	$CameraContainer/Camera/Camera.translation = 20.0 * Vector3.BACK * (100 - new_height) / 100.0
+
+
+func _set_game_time(new_time):
+	game_time = new_time
+	$HUD/Scoreboard/Panel/Label.text = "%s m" % floor(new_time)

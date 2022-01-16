@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://scenes/game/game.gd" type="Script" id=1]
 [ext_resource path="res://addons/multiplayer/NetworkGame.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://assets/themes/new_theme.tres" type="Theme" id=7]
 [ext_resource path="res://assets/sprites/flying-ship-airship-futuristic-ship-vector-clipart_csp81717309 (Custom).jpg" type="Texture" id=8]
 [ext_resource path="res://assets/audio/Fun in a Bottle.mp3" type="AudioStream" id=9]
+[ext_resource path="res://assets/fonts/main_font.tres" type="DynamicFont" id=10]
 
 [sub_resource type="Curve" id=3]
 _data = [ Vector2( 0, 0 ), 0.0, 1.0, 0, 1, Vector2( 1, 1 ), 1.0, 0.0, 1, 0 ]
@@ -172,6 +173,13 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 2.5, 5 )
 }
 
+[sub_resource type="StyleBoxFlat" id=12]
+bg_color = Color( 0, 0, 0, 1 )
+expand_margin_left = 8.0
+expand_margin_right = 8.0
+expand_margin_top = 8.0
+expand_margin_bottom = 8.0
+
 [sub_resource type="ProceduralSky" id=8]
 sun_latitude = 70.0
 sun_longitude = 45.0
@@ -196,7 +204,7 @@ tilt_curve = SubResource( 3 )
 [node name="Sync" type="Node" parent="game"]
 script = ExtResource( 5 )
 initial = PoolStringArray( "height" )
-synced = PoolStringArray( "angle", "height" )
+synced = PoolStringArray( "angle", "height", "game_time" )
 process_only_network_master = true
 
 [node name="Ship" parent="game" instance=ExtResource( 4 )]
@@ -278,6 +286,33 @@ custom_icons/grabber_disabled = ExtResource( 8 )
 step = 0.1
 value = 50.0
 editable = false
+
+[node name="Scoreboard" type="CenterContainer" parent="game/HUD"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -512.0
+margin_right = 512.0
+margin_bottom = 48.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="PanelContainer" parent="game/HUD/Scoreboard"]
+margin_left = 480.0
+margin_right = 544.0
+margin_bottom = 48.0
+custom_styles/panel = SubResource( 12 )
+
+[node name="Label" type="Label" parent="game/HUD/Scoreboard/Panel"]
+margin_right = 64.0
+margin_bottom = 48.0
+custom_colors/font_color = Color( 0.376471, 0.87451, 0, 1 )
+custom_fonts/font = ExtResource( 10 )
+text = "0 m"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="game"]
 environment = SubResource( 9 )
