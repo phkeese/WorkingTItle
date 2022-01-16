@@ -278,13 +278,10 @@ script = ExtResource( 15 )
 [node name="FirePositions" type="Spatial" parent="."]
 
 [node name="Position3D" type="Position3D" parent="FirePositions"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.62016, 0, -1.90535 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.30886, 0, 18.8963 )
 
 [node name="Position3D3" type="Position3D" parent="FirePositions"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.83037, 0, 11.6226 )
-
-[node name="Position3D4" type="Position3D" parent="FirePositions"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.65827, 0, 16.4241 )
 
 [connection signal="give" from="Stations/Wood" to="." method="_on_give"]
 [connection signal="powerdown" from="Stations/Engine" to="." method="_on_Engine_powerdown"]
