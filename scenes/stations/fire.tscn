@@ -8,7 +8,7 @@
 [sub_resource type="SpatialMaterial" id=16]
 flags_transparent = true
 params_billboard_mode = 1
-albedo_color = Color( 0, 0, 0, 0.262745 )
+albedo_color = Color( 1, 1, 1, 0.262745 )
 albedo_texture = ExtResource( 1 )
 
 [sub_resource type="Curve" id=12]
@@ -68,6 +68,14 @@ script = ExtResource( 2 )
 synced = PoolStringArray( "global_transform" )
 
 [node name="Station" parent="." instance=ExtResource( 3 )]
+title = "FIRE!"
+
+[node name="ProgressBar" parent="Station/HUD/VBoxContainer" index="1"]
+visible = false
+
+[node name="Label2" parent="Station/HUD/VBoxContainer" index="2"]
+margin_top = 18.0
+margin_bottom = 32.0
 
 [connection signal="entered" from="Station" to="." method="_on_Station_entered"]
 [connection signal="interacted_with" from="Station" to="." method="_on_Station_interacted_with"]
