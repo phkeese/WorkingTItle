@@ -36,7 +36,10 @@ func _process(delta: float) -> void:
 	var speed := $Ship.speed() as float
 	$CameraContainer.rotation_degrees.z = max_pitch * (1.1 - speed)
 	
-	self.height -= (0.9 - speed) / 10.0
+	if speed <= 0.1:
+		self.height -= (1.0 - speed) / 10.0	
+	else:
+		self.height += 0.1
 	self.game_time += delta
 
 

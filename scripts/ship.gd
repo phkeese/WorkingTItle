@@ -45,6 +45,8 @@ func reset():
 
 
 func spawn_fire():
+	if $Fires.get_child_count():
+		return
 	print("spawn fire")
 	var positions := $FirePositions.get_children()
 	positions.shuffle()
