@@ -270,6 +270,7 @@ unit_db = 34.982
 pitch_scale = 2.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Stations/Engine"]
+reset_on_save = false
 anims/RESET = SubResource( 16 )
 anims/powerdown = SubResource( 15 )
 anims/powerup = SubResource( 8 )
