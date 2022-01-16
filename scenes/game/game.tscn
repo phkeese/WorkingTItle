@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://scenes/game/game.gd" type="Script" id=1]
 [ext_resource path="res://addons/multiplayer/NetworkGame.gd" type="Script" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://scenes/ship.tscn" type="PackedScene" id=4]
 [ext_resource path="res://addons/multiplayer/Sync.gd" type="Script" id=5]
 [ext_resource path="res://icon.png" type="Texture" id=6]
+[ext_resource path="res://assets/themes/new_theme.tres" type="Theme" id=7]
+[ext_resource path="res://assets/sprites/flying-ship-airship-futuristic-ship-vector-clipart_csp81717309 (Custom).jpg" type="Texture" id=8]
 
 [sub_resource type="Curve" id=3]
 _data = [ Vector2( 0.383117, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 1.4, 0.0, 0, 0 ]
@@ -117,5 +119,42 @@ anims/Scroll = SubResource( 7 )
 
 [node name="Sync" type="Node" parent="game"]
 script = ExtResource( 5 )
-synced = PoolStringArray( "angle" )
+synced = PoolStringArray( "angle", "height" )
 process_only_network_master = true
+
+[node name="HUD" type="CanvasLayer" parent="game"]
+
+[node name="PanelContainer" type="PanelContainer" parent="game/HUD"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -116.0
+margin_right = 56.0
+margin_bottom = 116.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="game/HUD/PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 49.0
+margin_bottom = 225.0
+theme = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="game/HUD/PanelContainer/VBoxContainer"]
+margin_right = 42.0
+margin_bottom = 14.0
+text = "Height"
+
+[node name="Height" type="VSlider" parent="game/HUD/PanelContainer/VBoxContainer"]
+margin_top = 18.0
+margin_right = 16.0
+margin_bottom = 218.0
+rect_min_size = Vector2( 0, 200 )
+custom_icons/grabber_disabled = ExtResource( 8 )
+step = 0.1
+value = 50.0
+editable = false

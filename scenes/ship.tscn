@@ -1,15 +1,17 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://assets/models/platform_v2/platform_v2.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/stations/engine_station.tscn" type="PackedScene" id=2]
-[ext_resource path="res://assets/models/platform_v2/wing_l.glb" type="PackedScene" id=3]
 [ext_resource path="res://scripts/ship.gd" type="Script" id=4]
 [ext_resource path="res://assets/models/platform/platform_v2.glb" type="PackedScene" id=5]
 [ext_resource path="res://scenes/stations/furnace_station.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/stations/water_station.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/consumer_station.tscn" type="PackedScene" id=8]
+[ext_resource path="res://assets/models/platform_v2/driveshaft.glb" type="PackedScene" id=9]
 [ext_resource path="res://assets/models/platform_v2/propeller.glb" type="PackedScene" id=10]
 [ext_resource path="res://scenes/stations/wood_station.tscn" type="PackedScene" id=11]
+[ext_resource path="res://assets/models/wings/wing_l_flapping-1hz.tscn" type="PackedScene" id=12]
+[ext_resource path="res://assets/models/wings/wing_r_flapping-1hz.tscn" type="PackedScene" id=13]
 
 [sub_resource type="Animation" id=6]
 length = 0.001
@@ -76,11 +78,13 @@ autoplay = "rotate"
 anims/RESET = SubResource( 6 )
 anims/rotate = SubResource( 7 )
 
-[node name="wing_l" parent="Ship" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.06498, -4.76837e-07, 4.56093 )
+[node name="driveshaft" parent="Ship" instance=ExtResource( 9 )]
 
-[node name="wing_r" parent="Ship" instance=ExtResource( 3 )]
-transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, -7.976, -4.76837e-07, 4.62314 )
+[node name="wing_l_flapping-1hz" parent="Ship" instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.2373, 0, 4.54314 )
+
+[node name="wing_l_flapping-1hz2" parent="Ship" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.10818, 0, 4.60886 )
 
 [node name="Stations" type="Spatial" parent="."]
 
@@ -98,7 +102,8 @@ max_items = 2
 
 [node name="Boiler" parent="Stations/Furnace" instance=ExtResource( 8 )]
 inputs = [ "water" ]
-max_items = 2
+max_items = 1
+duration = 30.0
 
 [node name="Station" parent="Stations/Furnace/Boiler" index="0"]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -5.86125, 0, 2.21626 )

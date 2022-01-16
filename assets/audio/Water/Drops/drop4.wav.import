@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/drop4.wav-da0efe3c2772bc13d5bbb2d5e8c9d95e.sample"
+
+[deps]
+
+source_file="res://assets/audio/Water/Drops/drop4.wav"
+dest_files=[ "res://.import/drop4.wav-da0efe3c2772bc13d5bbb2d5e8c9d95e.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
