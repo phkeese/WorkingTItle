@@ -16,5 +16,8 @@ func _process(delta: float) -> void:
 func has_requirements() -> bool:
 	var fire = get_node(fire_station)
 	var steam = get_node(boiler_station)
-	return not (is_equal_approx(fire.get_health(), 0.0) or is_equal_approx(fire.get_health(), 0.0))
+	return not (is_equal_approx(fire.get_health(), 0.0) or is_equal_approx(steam.get_health(), 0.0))
 	
+
+func speed() -> float:
+	return $Station.health
