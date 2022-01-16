@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://scenes/game/game.gd" type="Script" id=1]
 [ext_resource path="res://addons/multiplayer/NetworkGame.gd" type="Script" id=2]
@@ -67,6 +67,14 @@ tracks/0/keys = {
 "values": [ Vector3( 0, 0, 0 ), Vector3( 1, 0, 0 ) ]
 }
 
+[sub_resource type="ProceduralSky" id=8]
+sun_latitude = 70.0
+sun_longitude = 45.0
+
+[sub_resource type="Environment" id=9]
+background_mode = 2
+background_sky = SubResource( 8 )
+
 [node name="NetworkGame" type="Node"]
 script = ExtResource( 2 )
 port = 2455
@@ -79,6 +87,12 @@ script = ExtResource( 1 )
 max_angle = 45.0
 player_weight = 3.0
 tilt_curve = SubResource( 3 )
+
+[node name="Sync" type="Node" parent="game"]
+script = ExtResource( 5 )
+initial = PoolStringArray( "height" )
+synced = PoolStringArray( "angle", "height" )
+process_only_network_master = true
 
 [node name="Ship" parent="game" instance=ExtResource( 4 )]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0 )
@@ -117,10 +131,9 @@ autoplay = "Scroll"
 anims/RESET = SubResource( 6 )
 anims/Scroll = SubResource( 7 )
 
-[node name="Sync" type="Node" parent="game"]
-script = ExtResource( 5 )
-synced = PoolStringArray( "angle", "height" )
-process_only_network_master = true
+[node name="DirectionalLight" type="DirectionalLight" parent="game/CameraContainer"]
+transform = Transform( 0.707107, 0.579228, 0.40558, -5.01436e-08, -0.573576, 0.819152, 0.707107, -0.579228, -0.40558, 79.8346, 0, -54.7327 )
+shadow_enabled = true
 
 [node name="HUD" type="CanvasLayer" parent="game"]
 
@@ -158,3 +171,6 @@ custom_icons/grabber_disabled = ExtResource( 8 )
 step = 0.1
 value = 50.0
 editable = false
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="game"]
+environment = SubResource( 9 )

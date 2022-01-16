@@ -10,6 +10,10 @@ export var max_pitch := 20.0
 export var height := 100.0 setget _set_height
 
 
+func _ready() -> void:
+	self.height = height
+
+
 func _process(delta: float) -> void:
 	var center := Vector3.ZERO
 	for player in $Players.get_children():
