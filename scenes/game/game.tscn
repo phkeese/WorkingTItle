@@ -1,11 +1,11 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://scenes/game/game.gd" type="Script" id=1]
 [ext_resource path="res://addons/multiplayer/NetworkGame.gd" type="Script" id=2]
 [ext_resource path="res://scenes/player/player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/ship.tscn" type="PackedScene" id=4]
 [ext_resource path="res://addons/multiplayer/Sync.gd" type="Script" id=5]
-[ext_resource path="res://icon.png" type="Texture" id=6]
+[ext_resource path="res://assets/sprites/a490b0c1-47ef-405b-950b-88de941bfa08.__CR0,0,1500,1500_PT0_SX300_V1___.jpg" type="Texture" id=6]
 [ext_resource path="res://assets/themes/new_theme.tres" type="Theme" id=7]
 [ext_resource path="res://assets/sprites/flying-ship-airship-futuristic-ship-vector-clipart_csp81717309 (Custom).jpg" type="Texture" id=8]
 
@@ -17,10 +17,69 @@ albedo_color = Color( 1, 0, 0, 1 )
 
 [sub_resource type="SphereMesh" id=1]
 
-[sub_resource type="SpatialMaterial" id=5]
-albedo_texture = ExtResource( 6 )
-uv1_scale = Vector3( 10, 10, 10 )
-uv1_triplanar = true
+[sub_resource type="Shader" id=10]
+code = "// NOTE: Shader automatically converted from Godot Engine 3.4.2.stable's SpatialMaterial.
+
+shader_type spatial;
+render_mode blend_mix,depth_draw_opaque,cull_back,diffuse_burley,specular_schlick_ggx;
+uniform vec4 albedo : hint_color;
+uniform sampler2D texture_albedo : hint_albedo;
+uniform float specular;
+uniform float metallic;
+uniform float roughness : hint_range(0,1);
+uniform float point_size : hint_range(0,128);
+uniform vec3 uv1_scale;
+uniform vec3 uv1_offset;
+uniform vec3 detail_scale;
+uniform vec3 detail_offset;
+uniform float factor : hint_range(0.0,1.0);
+uniform float detail_angle;
+
+varying vec2 detail_uv;
+
+vec2 rotate(vec2 v, float a) {
+	float s = sin(a);
+	float c = cos(a);
+	mat2 m = mat2(vec2(c, -s),vec2(s, c));
+	return m * v;
+}
+
+void vertex() {
+	detail_uv = UV*detail_scale.xy+detail_offset.xy;
+	detail_uv = rotate(detail_uv, detail_angle);
+	UV=UV*uv1_scale.xy+uv1_offset.xy;
+}
+
+
+
+
+void fragment() {
+	vec2 base_uv = UV;
+	vec4 albedo_tex = texture(texture_albedo,base_uv);
+	vec4 detail_tex = texture(texture_albedo,detail_uv);
+	
+	ALBEDO = albedo.rgb * albedo_tex.rgb;
+	ALBEDO = mix(ALBEDO, detail_tex.rgb * albedo.rgb, factor);
+	METALLIC = metallic;
+	ROUGHNESS = roughness;
+	SPECULAR = specular;
+}
+"
+
+[sub_resource type="ShaderMaterial" id=11]
+shader = SubResource( 10 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/specular = 0.5
+shader_param/metallic = 0.0
+shader_param/roughness = 1.0
+shader_param/point_size = 1.0
+shader_param/uv1_scale = Vector3( 30, 30, 30 )
+shader_param/uv1_offset = Vector3( 0, 0, 0 )
+shader_param/detail_scale = Vector3( 50, 50, 50 )
+shader_param/detail_offset = Vector3( 0, 0, 0 )
+shader_param/factor = 0.0
+shader_param/detail_angle = -2.552
+shader_param/texture_albedo = ExtResource( 6 )
 
 [sub_resource type="PlaneMesh" id=4]
 
@@ -38,21 +97,78 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Vector3( 0, 0, 0 ) ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("game/CameraContainer/Camera/Camera/Sea:material_override:shader_param/uv1_offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("game/CameraContainer/Camera/Camera/Sea:material_override:shader_param/detail_offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("game/CameraContainer/Camera/Camera/Sea:material_override:shader_param/factor")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
 
 [sub_resource type="Animation" id=7]
 resource_name = "Scroll"
+length = 5.0
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("game/CameraContainer/Camera/Camera/Sea:material_override:uv1_offset")
+tracks/0/path = NodePath("game/CameraContainer/Camera/Camera/Sea:material_override:shader_param/uv1_offset")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
+"times": PoolRealArray( 0, 5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector3( 0, 0, 0 ), Vector3( 1, 0, 0 ) ]
+"values": [ Vector3( 0, 0, 0 ), Vector3( 3, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("game/CameraContainer/Camera/Camera/Sea:material_override:shader_param/detail_offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 10, 0, 0 ) ]
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("game/CameraContainer/Camera/Camera/Sea:material_override:shader_param/factor")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 2.5, 5 )
 }
 
 [sub_resource type="ProceduralSky" id=8]
@@ -109,8 +225,8 @@ near = 10.0
 far = 130.0
 
 [node name="Sea" type="MeshInstance" parent="game/CameraContainer/Camera/Camera"]
-transform = Transform( 179.636, 0, 0, 0, -7.85214e-06, -179.636, 0, 179.636, -7.85214e-06, -9.094, 1.5245e-06, -54.8765 )
-material_override = SubResource( 5 )
+transform = Transform( 179.636, 0, 7.85214e-06, 7.85214e-06, 3.43228e-13, -179.636, 0, 179.636, 3.43228e-13, -9.094, 1.5245e-06, -54.8765 )
+material_override = SubResource( 11 )
 mesh = SubResource( 4 )
 skeleton = NodePath("../../../..")
 material/0 = null
