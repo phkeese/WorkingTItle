@@ -28,6 +28,11 @@ func _physics_process(delta: float) -> void:
 	rpc("turn_towards", Vector3(right, 0, -up))
 	
 	if global_transform.origin.y <= -50:
+		kill()
+
+
+func kill():
+	if is_network_master():
 		global_transform.origin = Vector3.ZERO
 
 

@@ -275,6 +275,9 @@ autostart = true
 [node name="Fires" type="Spatial" parent="." groups=["consumer"]]
 script = ExtResource( 15 )
 
+[node name="Fire" parent="Fires" instance=ExtResource( 16 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.76686, 0, 8.06285 )
+
 [node name="FirePositions" type="Spatial" parent="."]
 
 [node name="Position3D" type="Position3D" parent="FirePositions"]

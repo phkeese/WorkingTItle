@@ -1,5 +1,6 @@
 extends Spatial
 signal interacted_with(by, item)
+signal entered(by)
 
 
 export var title := "Station" setget _set_title
@@ -31,6 +32,7 @@ func _set_health(new_health: float) -> void:
 
 func _on_Area_body_entered(body: Node) -> void:
 	if body.is_in_group("myplayers"):
+		emit_signal("entered", body)
 		_in_range[body] = body
 		body.connect("interacted", self, "_on_interacted")
 		if body.is_network_master():
