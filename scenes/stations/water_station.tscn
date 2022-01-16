@@ -12,6 +12,7 @@ item_scene = ExtResource( 3 )
 
 [node name="Station" parent="." index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.83776, 0, 0 )
+title = "Water"
 
 [node name="CollisionShape" parent="Station/Area" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.79052, 2.04289, 0 )

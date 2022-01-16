@@ -1,18 +1,69 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scenes/game/game.gd" type="Script" id=1]
 [ext_resource path="res://addons/multiplayer/NetworkGame.gd" type="Script" id=2]
 [ext_resource path="res://scenes/player/player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/ship.tscn" type="PackedScene" id=4]
 [ext_resource path="res://addons/multiplayer/Sync.gd" type="Script" id=5]
+[ext_resource path="res://icon.png" type="Texture" id=6]
 
 [sub_resource type="Curve" id=3]
-_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 1.4, 0.0, 0, 0 ]
+_data = [ Vector2( 0.383117, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 1.4, 0.0, 0, 0 ]
 
 [sub_resource type="SpatialMaterial" id=2]
 albedo_color = Color( 1, 0, 0, 1 )
 
 [sub_resource type="SphereMesh" id=1]
+
+[sub_resource type="SpatialMaterial" id=5]
+albedo_texture = ExtResource( 6 )
+uv1_scale = Vector3( 10, 10, 10 )
+uv1_triplanar = true
+
+[sub_resource type="PlaneMesh" id=4]
+
+[sub_resource type="Animation" id=6]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("game/Sea:material_override:uv1_offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("game/CameraContainer/Sea:material_override:uv1_offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "Scroll"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("game/CameraContainer/Sea:material_override:uv1_offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 1, 0, 0 ) ]
+}
 
 [node name="NetworkGame" type="Node"]
 script = ExtResource( 2 )
@@ -48,6 +99,21 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.852, 0, 0 )
 
 [node name="Camera" type="Camera" parent="game/CameraContainer"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 23.9463, 27.097, 0 )
+near = 10.0
+far = 130.0
+
+[node name="Sea" type="MeshInstance" parent="game/CameraContainer"]
+transform = Transform( 179.636, 0, 0, 0, 179.636, 0, 0, 0, 179.636, 14.852, -100, 0 )
+material_override = SubResource( 5 )
+mesh = SubResource( 4 )
+skeleton = NodePath("../..")
+material/0 = null
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="game/CameraContainer/Sea"]
+root_node = NodePath("../../../..")
+autoplay = "Scroll"
+anims/RESET = SubResource( 6 )
+anims/Scroll = SubResource( 7 )
 
 [node name="Sync" type="Node" parent="game"]
 script = ExtResource( 5 )
