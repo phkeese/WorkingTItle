@@ -45,7 +45,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Steambird Willy"
-run/main_scene="res://scenes/game/game.tscn"
+run/main_scene="res://scenes/loading.tscn"
 config/icon="res://icon.png"
 
 [editor_plugins]
