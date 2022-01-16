@@ -77,6 +77,8 @@ visible = false
 margin_top = 18.0
 margin_bottom = 32.0
 
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+
 [connection signal="entered" from="Station" to="." method="_on_Station_entered"]
 [connection signal="interacted_with" from="Station" to="." method="_on_Station_interacted_with"]
 

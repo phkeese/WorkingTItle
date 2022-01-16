@@ -192,7 +192,7 @@ background_sky = SubResource( 8 )
 [node name="NetworkGame" type="Node"]
 script = ExtResource( 2 )
 port = 2455
-ip = "10.1.1.25"
+ip = "gamedev.paulmethfessel.com"
 player_scene = ExtResource( 3 )
 players_container = NodePath("game/Players")
 
