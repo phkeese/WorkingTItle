@@ -263,6 +263,12 @@ shape = SubResource( 5 )
 transform = Transform( 1, 0, 0, 0, 0.866025, -0.5, 0, 0.5, 0.866025, -0.532178, -0.527652, 6.46755 )
 shape = SubResource( 4 )
 
+[node name="OmniLight" type="OmniLight" parent="Stations/Furnace"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.57045, 0.747241, 0.509339 )
+light_color = Color( 1, 0.513726, 0, 1 )
+light_energy = 3.654
+shadow_enabled = true
+
 [node name="Engine" parent="Stations" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.98211, 0, 6.81615 )
 fire_station = NodePath("../Furnace")
