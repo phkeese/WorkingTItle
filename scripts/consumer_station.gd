@@ -22,3 +22,7 @@ func _on_Station_interacted_with(by: Player, item: Item) -> void:
 
 func get_health() -> float:
 	return $Station.health as float
+
+
+func reset():
+	$Station.health = 1.0

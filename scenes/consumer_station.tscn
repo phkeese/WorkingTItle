@@ -6,7 +6,7 @@
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 2.95732, 1, 1.84686 )
 
-[node name="Consumer Station" type="Spatial"]
+[node name="Consumer Station" type="Spatial" groups=["consumer"]]
 script = ExtResource( 1 )
 inputs = [ "wood" ]
 

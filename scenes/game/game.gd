@@ -11,6 +11,7 @@ export var height := 100.0 setget _set_height
 export var game_time := 0.0 setget _set_game_time
 
 
+
 func _ready() -> void:
 	game_over()
 
@@ -50,6 +51,8 @@ func _set_height(new_height: float) -> void:
 	height = clamp(new_height, 0.0, 100.0)
 	$HUD/Ingame/PanelContainer/VBoxContainer/Height.value = new_height
 	$CameraContainer/Camera/Camera.translation = 20.0 * Vector3.BACK * (100 - new_height) / 100.0
+	if is_equal_approx(height, 0.0):
+		rpc("game_over")
 
 
 func _set_game_time(new_time):
@@ -62,12 +65,25 @@ func _on_Play_pressed():
 
 
 remotesync func start_game():
-	$"../Lobby/PanelContainer".hide()
+	$HUD/Lobby/PanelContainer.hide()
+	
 	get_tree().paused = false
 	print("start game")
 
 
 remotesync func game_over():
-	$"../Lobby/PanelContainer".show()
+	$HUD/Lobby/PanelContainer.show()
+	$HUD/Lobby/PanelContainer/CenterContainer/VBoxContainer/Score.text = "%s m" % game_time
+	
 	get_tree().paused = true
-	print("start game")
+	print("end game")
+
+
+func _on_Restart_pressed():
+	rpc("restart")
+
+
+remotesync func restart():
+	get_tree().network_peer = null
+	get_tree().reload_current_scene()
+	get_tree().paused = true
