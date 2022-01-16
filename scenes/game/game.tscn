@@ -10,7 +10,7 @@
 [ext_resource path="res://assets/sprites/flying-ship-airship-futuristic-ship-vector-clipart_csp81717309 (Custom).jpg" type="Texture" id=8]
 
 [sub_resource type="Curve" id=3]
-_data = [ Vector2( 0.383117, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 1.4, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 0 ), 0.0, 1.0, 0, 1, Vector2( 1, 1 ), 1.0, 0.0, 1, 0 ]
 
 [sub_resource type="SpatialMaterial" id=2]
 albedo_color = Color( 1, 0, 0, 1 )
@@ -27,7 +27,7 @@ uv1_triplanar = true
 [sub_resource type="Animation" id=6]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("game/Sea:material_override:uv1_offset")
+tracks/0/path = NodePath("game/CameraContainer/Camera/Camera/Sea:material_override:uv1_offset")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -38,24 +38,12 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Vector3( 0, 0, 0 ) ]
 }
-tracks/1/type = "value"
-tracks/1/path = NodePath("game/CameraContainer/Sea:material_override:uv1_offset")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector3( 0, 0, 0 ) ]
-}
 
 [sub_resource type="Animation" id=7]
 resource_name = "Scroll"
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("game/CameraContainer/Sea:material_override:uv1_offset")
+tracks/0/path = NodePath("game/CameraContainer/Camera/Camera/Sea:material_override:uv1_offset")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -85,7 +73,7 @@ players_container = NodePath("game/Players")
 [node name="game" type="Spatial" parent="."]
 script = ExtResource( 1 )
 max_angle = 45.0
-player_weight = 3.0
+player_weight = 10.0
 tilt_curve = SubResource( 3 )
 
 [node name="Sync" type="Node" parent="game"]
@@ -113,26 +101,28 @@ unreliable_synced = PoolStringArray( "global_transform" )
 [node name="CameraContainer" type="Spatial" parent="game"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.852, 0, 0 )
 
-[node name="Camera" type="Camera" parent="game/CameraContainer"]
+[node name="Camera" type="Spatial" parent="game/CameraContainer"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 23.9463, 27.097, 0 )
+
+[node name="Camera" type="Camera" parent="game/CameraContainer/Camera"]
 near = 10.0
 far = 130.0
 
-[node name="Sea" type="MeshInstance" parent="game/CameraContainer"]
-transform = Transform( 179.636, 0, 0, 0, 179.636, 0, 0, 0, 179.636, 14.852, -100, 0 )
+[node name="Sea" type="MeshInstance" parent="game/CameraContainer/Camera/Camera"]
+transform = Transform( 179.636, 0, 0, 0, -7.85214e-06, -179.636, 0, 179.636, -7.85214e-06, -9.0943, 5.55559e-06, -127.097 )
 material_override = SubResource( 5 )
 mesh = SubResource( 4 )
-skeleton = NodePath("../..")
+skeleton = NodePath("../../../..")
 material/0 = null
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="game/CameraContainer/Sea"]
-root_node = NodePath("../../../..")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="game/CameraContainer/Camera/Camera/Sea"]
+root_node = NodePath("../../../../../..")
 autoplay = "Scroll"
 anims/RESET = SubResource( 6 )
 anims/Scroll = SubResource( 7 )
 
-[node name="DirectionalLight" type="DirectionalLight" parent="game/CameraContainer"]
-transform = Transform( 0.707107, 0.579228, 0.40558, -5.01436e-08, -0.573576, 0.819152, 0.707107, -0.579228, -0.40558, 79.8346, 0, -54.7327 )
+[node name="DirectionalLight" type="DirectionalLight" parent="game/CameraContainer/Camera/Camera"]
+transform = Transform( 0.707107, 0.579228, 0.40558, -0.707107, 0.579228, 0.40558, -8.10523e-08, -0.573576, 0.819152, 55.8883, 54.7327, -27.097 )
 shadow_enabled = true
 
 [node name="HUD" type="CanvasLayer" parent="game"]
