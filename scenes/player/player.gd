@@ -60,5 +60,7 @@ remotesync func remove_item() -> void:
 
 
 remotesync func turn_towards(local: Vector3):
+	if local.length_squared() < 0.1:
+		return
 	var angle := atan2(local.z, local.x)
 	$char_v1.look_at(to_global(local), Vector3.UP)

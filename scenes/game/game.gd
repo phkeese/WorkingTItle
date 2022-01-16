@@ -41,4 +41,4 @@ func _set_angle(new_angle: float) -> void:
 func _set_height(new_height: float) -> void:
 	height = clamp(new_height, 0.0, 100.0)
 	$HUD/PanelContainer/VBoxContainer/Height.value = new_height
-	$CameraContainer/Camera/Camera.translation = 5.0 * Vector3.BACK * (100 - new_height) / 100.0
+	$CameraContainer/Camera/Camera.translation = 20.0 * Vector3.BACK * (100 - new_height) / 100.0

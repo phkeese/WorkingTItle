@@ -66,7 +66,7 @@ background_sky = SubResource( 8 )
 [node name="NetworkGame" type="Node"]
 script = ExtResource( 2 )
 port = 2455
-ip = "gamedev.paulmethfessel.com"
+ip = "10.1.1.25"
 player_scene = ExtResource( 3 )
 players_container = NodePath("game/Players")
 
@@ -109,7 +109,7 @@ near = 10.0
 far = 130.0
 
 [node name="Sea" type="MeshInstance" parent="game/CameraContainer/Camera/Camera"]
-transform = Transform( 179.636, 0, 0, 0, -7.85214e-06, -179.636, 0, 179.636, -7.85214e-06, -9.0943, 5.55559e-06, -127.097 )
+transform = Transform( 179.636, 0, 0, 0, -7.85214e-06, -179.636, 0, 179.636, -7.85214e-06, -9.094, 1.5245e-06, -54.8765 )
 material_override = SubResource( 5 )
 mesh = SubResource( 4 )
 skeleton = NodePath("../../../..")
