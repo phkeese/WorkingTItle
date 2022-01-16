@@ -12,7 +12,7 @@ export var game_time := 0.0 setget _set_game_time
 
 
 func _ready() -> void:
-	self.height = height
+	game_over()
 
 
 func _process(delta: float) -> void:
@@ -47,10 +47,26 @@ func _set_angle(new_angle: float) -> void:
 
 func _set_height(new_height: float) -> void:
 	height = clamp(new_height, 0.0, 100.0)
-	$HUD/PanelContainer/VBoxContainer/Height.value = new_height
+	$HUD/Ingame/PanelContainer/VBoxContainer/Height.value = new_height
 	$CameraContainer/Camera/Camera.translation = 20.0 * Vector3.BACK * (100 - new_height) / 100.0
 
 
 func _set_game_time(new_time):
 	game_time = new_time
-	$HUD/Scoreboard/Panel/Label.text = "%s m" % floor(new_time)
+	$HUD/Ingame/Scoreboard/Panel/Label.text = "%s m" % floor(new_time)
+
+
+func _on_Play_pressed():
+	rpc("start_game")
+
+
+remotesync func start_game():
+	$HUD/Lobby.hide()
+	get_tree().paused = false
+	print("start game")
+
+
+remotesync func game_over():
+	$HUD/Lobby.show()
+	get_tree().paused = true
+	print("start game")

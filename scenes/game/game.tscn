@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://scenes/game/game.gd" type="Script" id=1]
 [ext_resource path="res://addons/multiplayer/NetworkGame.gd" type="Script" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://assets/sprites/flying-ship-airship-futuristic-ship-vector-clipart_csp81717309 (Custom).jpg" type="Texture" id=8]
 [ext_resource path="res://assets/audio/Fun in a Bottle.mp3" type="AudioStream" id=9]
 [ext_resource path="res://assets/fonts/main_font.tres" type="DynamicFont" id=10]
+[ext_resource path="res://assets/fonts/small.tres" type="DynamicFont" id=11]
 
 [sub_resource type="Curve" id=3]
 _data = [ Vector2( 0, 0 ), 0.0, 1.0, 0, 1, Vector2( 1, 1 ), 1.0, 0.0, 1, 0 ]
@@ -252,17 +253,24 @@ shadow_enabled = true
 
 [node name="HUD" type="CanvasLayer" parent="game"]
 
-[node name="PanelContainer" type="PanelContainer" parent="game/HUD"]
-anchor_top = 0.5
-anchor_bottom = 0.5
-margin_top = -116.0
-margin_right = 56.0
-margin_bottom = 116.0
+[node name="Ingame" type="Control" parent="game/HUD"]
+margin_right = 40.0
+margin_bottom = 40.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="game/HUD/PanelContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="game/HUD/Ingame"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = 164.0
+margin_right = 56.0
+margin_bottom = 396.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="game/HUD/Ingame/PanelContainer"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 49.0
@@ -272,38 +280,39 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="game/HUD/PanelContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="game/HUD/Ingame/PanelContainer/VBoxContainer"]
 margin_right = 42.0
 margin_bottom = 14.0
 text = "Height"
 
-[node name="Height" type="VSlider" parent="game/HUD/PanelContainer/VBoxContainer"]
+[node name="Height" type="VSlider" parent="game/HUD/Ingame/PanelContainer/VBoxContainer"]
 margin_top = 18.0
-margin_right = 16.0
+margin_right = 42.0
 margin_bottom = 218.0
 rect_min_size = Vector2( 0, 200 )
+size_flags_horizontal = 1
 custom_icons/grabber_disabled = ExtResource( 8 )
 step = 0.1
 value = 50.0
 editable = false
 
-[node name="Scoreboard" type="CenterContainer" parent="game/HUD"]
+[node name="Scoreboard" type="CenterContainer" parent="game/HUD/Ingame"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -512.0
-margin_right = 512.0
+margin_left = -20.0
+margin_right = 1004.0
 margin_bottom = 48.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Panel" type="PanelContainer" parent="game/HUD/Scoreboard"]
+[node name="Panel" type="PanelContainer" parent="game/HUD/Ingame/Scoreboard"]
 margin_left = 480.0
 margin_right = 544.0
 margin_bottom = 48.0
 custom_styles/panel = SubResource( 12 )
 
-[node name="Label" type="Label" parent="game/HUD/Scoreboard/Panel"]
+[node name="Label" type="Label" parent="game/HUD/Ingame/Scoreboard/Panel"]
 margin_right = 64.0
 margin_bottom = 48.0
 custom_colors/font_color = Color( 0.376471, 0.87451, 0, 1 )
@@ -314,6 +323,54 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Lobby" type="Control" parent="game/HUD"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelContainer" type="PanelContainer" parent="game/HUD/Lobby"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="game/HUD/Lobby/PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1017.0
+margin_bottom = 593.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="game/HUD/Lobby/PanelContainer/CenterContainer"]
+margin_left = 325.0
+margin_top = 226.0
+margin_right = 685.0
+margin_bottom = 360.0
+
+[node name="Label" type="Label" parent="game/HUD/Lobby/PanelContainer/CenterContainer/VBoxContainer"]
+margin_right = 360.0
+margin_bottom = 48.0
+custom_fonts/font = ExtResource( 10 )
+text = "Steambird Willy"
+
+[node name="Play" type="Button" parent="game/HUD/Lobby/PanelContainer/CenterContainer/VBoxContainer"]
+margin_top = 52.0
+margin_right = 360.0
+margin_bottom = 82.0
+focus_mode = 0
+custom_fonts/font = ExtResource( 11 )
+text = "Play!"
+
+[node name="PlayerCount" type="Label" parent="game/HUD/Lobby/PanelContainer/CenterContainer/VBoxContainer"]
+margin_top = 86.0
+margin_right = 360.0
+margin_bottom = 134.0
+custom_fonts/font = ExtResource( 10 )
+text = "Players: "
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="game"]
 environment = SubResource( 9 )
 
@@ -321,3 +378,5 @@ environment = SubResource( 9 )
 stream = ExtResource( 9 )
 autoplay = true
 bus = "Music"
+
+[connection signal="pressed" from="game/HUD/Lobby/PanelContainer/CenterContainer/VBoxContainer/Play" to="game" method="_on_Play_pressed"]
