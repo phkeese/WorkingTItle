@@ -25,7 +25,7 @@ func _process(delta: float) -> void:
 	var speed := $Ship.speed() as float
 	$CameraContainer.rotation_degrees.z = max_pitch * (1.0 - speed)
 	
-	self.height -= 1.0 - speed
+	self.height -= (1.0 - speed) / 10.0
 
 
 func _set_angle(new_angle: float) -> void:
@@ -35,5 +35,5 @@ func _set_angle(new_angle: float) -> void:
 
 
 func _set_height(new_height: float) -> void:
-	height = new_height
+	height = clamp(new_height, 0.0, 100.0)
 	$HUD/PanelContainer/VBoxContainer/Height.value = new_height

@@ -24,3 +24,14 @@ func _process(delta: float) -> void:
 
 func speed() -> float:
 	return $Stations/Engine.speed() as float
+
+
+func _on_Engine_powerdown() -> void:
+	$Stations/Engine/AnimationPlayer.play("powerdown")
+	$Stations/Engine/Particles.emitting = false
+
+
+func _on_Engine_powerup() -> void:
+	print("powerup")
+	$Stations/Engine/AnimationPlayer.play("powerup")
+	$Stations/Engine/Particles.emitting = true
