@@ -5,6 +5,9 @@ signal crashed
 onready var _rotor := $Ship/propeller
 
 
+export var fire_scene : PackedScene
+
+
 func _ready() -> void:
 	var lwing := $"Ship/wing_l_flapping-1hz/AnimationPlayer" as AnimationPlayer
 	lwing.get_animation("ArmatureAction").loop = true
@@ -39,3 +42,20 @@ func _on_Engine_powerup() -> void:
 func reset():
 	for node in get_tree().get_nodes_in_group("consumers"):
 		node.reset()
+
+
+func spawn_fire():
+	print("spawn fire")
+	var positions := $FirePositions.get_children()
+	positions.shuffle()
+	var pos = positions[0]
+	var fire := fire_scene.instance() as Spatial
+	fire.global_transform = pos.global_transform
+	$Fires.add_child(fire)
+	fire.global_transform = pos.global_transform
+	
+
+
+func _on_Disaster_timeout() -> void:
+	if is_network_master():
+		spawn_fire()

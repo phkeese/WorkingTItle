@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://assets/sprites/puff/whitePuff00.png" type="Texture" id=1]
+
+[sub_resource type="SpatialMaterial" id=11]
+params_blend_mode = 1
+params_billboard_mode = 1
+albedo_texture = ExtResource( 1 )
+
+[sub_resource type="Curve" id=12]
+_data = [ Vector2( 0, 0.0545454 ), 0.0, 0.0, 0, 0, Vector2( 0.165493, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=13]
+curve = SubResource( 12 )
+
+[sub_resource type="ParticlesMaterial" id=10]
+direction = Vector3( 0, 1, 0 )
+spread = 20.0
+gravity = Vector3( 0, 0, -9 )
+initial_velocity = 4.17
+initial_velocity_random = 0.01
+angle = 6.2
+angle_random = 1.0
+scale = 10.06
+scale_curve = SubResource( 13 )
+
+[sub_resource type="QuadMesh" id=14]
+
+[node name="Particles" type="Particles"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.194159, 8.84139, 4.92457 )
+material_override = SubResource( 11 )
+amount = 100
+lifetime = 3.0
+preprocess = 10.0
+visibility_aabb = AABB( -4, -3.81152, -4, 8, 8, 8 )
+process_material = SubResource( 10 )
+draw_pass_1 = SubResource( 14 )
