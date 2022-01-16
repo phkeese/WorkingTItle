@@ -39,6 +39,7 @@ func _process(delta: float) -> void:
 	self.game_time += delta
 
 
+
 func _set_angle(new_angle: float) -> void:
 	angle = clamp(new_angle, -max_angle, max_angle)
 	$CameraContainer.rotation_degrees = Vector3(-angle, 0.0, 0.0)
@@ -61,12 +62,12 @@ func _on_Play_pressed():
 
 
 remotesync func start_game():
-	$HUD/Lobby.hide()
+	$"../Lobby/PanelContainer".hide()
 	get_tree().paused = false
 	print("start game")
 
 
 remotesync func game_over():
-	$HUD/Lobby.show()
+	$"../Lobby/PanelContainer".show()
 	get_tree().paused = true
 	print("start game")

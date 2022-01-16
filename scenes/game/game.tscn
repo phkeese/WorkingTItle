@@ -323,54 +323,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Lobby" type="Control" parent="game/HUD"]
-pause_mode = 2
-anchor_right = 1.0
-anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="PanelContainer" type="PanelContainer" parent="game/HUD/Lobby"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="CenterContainer" type="CenterContainer" parent="game/HUD/Lobby/PanelContainer"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 1017.0
-margin_bottom = 593.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="game/HUD/Lobby/PanelContainer/CenterContainer"]
-margin_left = 325.0
-margin_top = 226.0
-margin_right = 685.0
-margin_bottom = 360.0
-
-[node name="Label" type="Label" parent="game/HUD/Lobby/PanelContainer/CenterContainer/VBoxContainer"]
-margin_right = 360.0
-margin_bottom = 48.0
-custom_fonts/font = ExtResource( 10 )
-text = "Steambird Willy"
-
-[node name="Play" type="Button" parent="game/HUD/Lobby/PanelContainer/CenterContainer/VBoxContainer"]
-margin_top = 52.0
-margin_right = 360.0
-margin_bottom = 82.0
-focus_mode = 0
-custom_fonts/font = ExtResource( 11 )
-text = "Play!"
-
-[node name="PlayerCount" type="Label" parent="game/HUD/Lobby/PanelContainer/CenterContainer/VBoxContainer"]
-margin_top = 86.0
-margin_right = 360.0
-margin_bottom = 134.0
-custom_fonts/font = ExtResource( 10 )
-text = "Players: "
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="game"]
 environment = SubResource( 9 )
 
@@ -379,4 +331,41 @@ stream = ExtResource( 9 )
 autoplay = true
 bus = "Music"
 
-[connection signal="pressed" from="game/HUD/Lobby/PanelContainer/CenterContainer/VBoxContainer/Play" to="game" method="_on_Play_pressed"]
+[node name="Lobby" type="CanvasLayer" parent="."]
+pause_mode = 2
+layer = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Lobby"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="Lobby/PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1017.0
+margin_bottom = 593.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Lobby/PanelContainer/CenterContainer"]
+margin_left = 325.0
+margin_top = 252.0
+margin_right = 685.0
+margin_bottom = 334.0
+
+[node name="Label" type="Label" parent="Lobby/PanelContainer/CenterContainer/VBoxContainer"]
+margin_right = 360.0
+margin_bottom = 48.0
+custom_fonts/font = ExtResource( 10 )
+text = "Steambird Willy"
+
+[node name="Play" type="Button" parent="Lobby/PanelContainer/CenterContainer/VBoxContainer"]
+margin_top = 52.0
+margin_right = 360.0
+margin_bottom = 82.0
+focus_mode = 0
+custom_fonts/font = ExtResource( 11 )
+text = "Play!"
+
+[connection signal="pressed" from="Lobby/PanelContainer/CenterContainer/VBoxContainer/Play" to="game" method="_on_Play_pressed"]

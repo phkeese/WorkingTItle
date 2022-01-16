@@ -194,3 +194,4 @@ remote func spawn_object(name: String, parent_path: NodePath, filenameOrNode, st
 func append_title_string(suffix: String):
 	var title = ProjectSettings.get("application/config/name")
 	OS.set_window_title(title + suffix)
+
