@@ -37,7 +37,7 @@ func _process(delta: float) -> void:
 	$CameraContainer.rotation_degrees.z = max_pitch * (1.1 - speed)
 	
 	if speed <= 0.1:
-		self.height -= (1.0 - speed) / 10.0	
+		self.height -= (1.0 - speed) / 20.0	
 	else:
 #		self.height += 0.1
 		pass

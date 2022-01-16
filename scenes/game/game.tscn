@@ -204,7 +204,7 @@ tilt_curve = SubResource( 3 )
 
 [node name="Sync" type="Node" parent="game"]
 script = ExtResource( 5 )
-initial = PoolStringArray( "height" )
+initial = PoolStringArray( "height", "angle" )
 synced = PoolStringArray( "angle", "height", "game_time" )
 process_only_network_master = true
 
