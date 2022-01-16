@@ -25,10 +25,10 @@ func _on_Station_entered(by) -> void:
 	if item and item.item_name == "water":
 		return
 	else:
-		by.kill()
+		by.rpc("kill")
 
 
 func _on_Station_interacted_with(by, item) -> void:
-	if item.item_name == "water":
+	if item and item.item_name == "water":
 		by.rpc("remove_item")
 		$Sync.remove()

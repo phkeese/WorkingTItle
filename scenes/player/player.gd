@@ -31,7 +31,7 @@ func _physics_process(delta: float) -> void:
 		global_transform.origin = Vector3.ZERO
 
 
-func kill():
+remotesync func kill():
 	if is_network_master():
 		global_transform.origin.y = -30
 
