@@ -346,9 +346,9 @@ margin_bottom = 593.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="game/HUD/Lobby/PanelContainer/CenterContainer"]
 margin_left = 325.0
-margin_top = 209.0
+margin_top = 226.0
 margin_right = 685.0
-margin_bottom = 377.0
+margin_bottom = 360.0
 
 [node name="Label" type="Label" parent="game/HUD/Lobby/PanelContainer/CenterContainer/VBoxContainer"]
 margin_right = 360.0
@@ -375,13 +375,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Restart" type="Button" parent="game/HUD/Lobby/PanelContainer/CenterContainer/VBoxContainer"]
-margin_top = 138.0
-margin_right = 360.0
-margin_bottom = 168.0
-custom_fonts/font = ExtResource( 11 )
-text = "Restart"
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="game"]
 environment = SubResource( 9 )
 
@@ -395,4 +388,3 @@ pause_mode = 2
 layer = 2
 
 [connection signal="pressed" from="game/HUD/Lobby/PanelContainer/CenterContainer/VBoxContainer/Play" to="game" method="_on_Play_pressed"]
-[connection signal="pressed" from="game/HUD/Lobby/PanelContainer/CenterContainer/VBoxContainer/Restart" to="game" method="_on_Restart_pressed"]

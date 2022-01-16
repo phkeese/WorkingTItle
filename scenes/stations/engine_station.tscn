@@ -8,7 +8,7 @@
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 1.39694, 1, 3.87288 )
 
-[node name="Engine" type="Spatial"]
+[node name="Engine" type="Spatial" groups=["consumer"]]
 script = ExtResource( 1 )
 
 [node name="Station" parent="." instance=ExtResource( 3 )]

@@ -68,6 +68,13 @@ remotesync func start_game():
 	$HUD/Lobby/PanelContainer.hide()
 	
 	get_tree().paused = false
+	
+	if is_network_master():
+		self.height = 100.0
+		self.angle = 0.0
+		for node in get_tree().get_nodes_in_group("consumer"):
+			node.reset()
+	
 	print("start game")
 
 
@@ -80,10 +87,5 @@ remotesync func game_over():
 
 
 func _on_Restart_pressed():
-	rpc("restart")
+	pass
 
-
-remotesync func restart():
-	get_tree().network_peer = null
-	get_tree().reload_current_scene()
-	get_tree().paused = true

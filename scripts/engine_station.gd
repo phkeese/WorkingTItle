@@ -34,3 +34,7 @@ func _set_powered(new_state: bool):
 			emit_signal("powerup")
 		else:
 			emit_signal("powerdown")
+
+
+func reset():
+	$Station.health = 1.0
