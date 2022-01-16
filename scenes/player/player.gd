@@ -2,12 +2,14 @@ class_name Player
 extends KinematicBody
 signal interacted(player, item)
 
+
 export var speed := 1.0
 export var gravity := 9.81
 
 
 var color setget set_color
 var item : Spatial setget _set_item
+var last_pos : Vector3
 
 
 func _network_ready(is_source):
@@ -23,6 +25,7 @@ func _physics_process(delta: float) -> void:
 	var up := Input.get_action_strength("player_1_up") - Input.get_action_strength("player_1_down")
 	var movement := Vector3.RIGHT * right + Vector3.FORWARD * up + Vector3.DOWN * gravity
 	move_and_slide(movement * speed, Vector3.UP, true)
+	rpc("turn_towards", Vector3(right, 0, -up))
 
 
 func _process(delta: float) -> void:
@@ -54,3 +57,8 @@ remotesync func remove_item() -> void:
 	if item:
 		item.get_node("Sync").remove()
 		item = null
+
+
+remotesync func turn_towards(local: Vector3):
+	var angle := atan2(local.z, local.x)
+	$char_v1.look_at(to_global(local), Vector3.UP)

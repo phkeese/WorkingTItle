@@ -21,7 +21,7 @@ gravity = 1.0
 script = ExtResource( 2 )
 initial = PoolStringArray( "color" )
 synced = PoolStringArray( "global_transform", "item" )
-unreliable_synced = PoolStringArray( "position" )
+unreliable_synced = PoolStringArray( "position", "last_pos" )
 process_only_network_master = true
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
@@ -34,3 +34,5 @@ material = SubResource( 3 )
 
 [node name="Hands" type="Position3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.52085, 0 )
+
+[node name="Pointer" type="Position3D" parent="."]
