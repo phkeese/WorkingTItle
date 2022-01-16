@@ -1,23 +1,17 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://addons/multiplayer/Sync.gd" type="Script" id=1]
 [ext_resource path="res://scripts/item.gd" type="Script" id=2]
-
-[sub_resource type="SpatialMaterial" id=2]
-albedo_color = Color( 0, 0.270588, 0.788235, 1 )
-
-[sub_resource type="CubeMesh" id=1]
+[ext_resource path="res://assets/models/items/item_waterbucket-filled.glb" type="PackedScene" id=3]
 
 [node name="Wood" type="Spatial"]
 script = ExtResource( 2 )
 item_name = "water"
 
-[node name="MeshInstance" type="MeshInstance" parent="."]
-material_override = SubResource( 2 )
-mesh = SubResource( 1 )
-material/0 = null
-
 [node name="Sync" type="Node" parent="."]
 script = ExtResource( 1 )
 initial = PoolStringArray( "global_transform" )
 synced = PoolStringArray( "global_transform" )
+
+[node name="item_waterbucket-filled" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1.41994, 0, 0, 0, 1.41994, 0, 0, 0, 1.41994, 0, 0, 0 )

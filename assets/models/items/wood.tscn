@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scripts/item.gd" type="Script" id=1]
+[ext_resource path="res://assets/models/items/item_wood.glb" type="PackedScene" id=2]
+
+[node name="Spatial" type="Spatial"]
+script = ExtResource( 1 )
+item_name = "wood"
+
+[node name="item_wood" parent="." instance=ExtResource( 2 )]

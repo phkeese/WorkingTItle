@@ -33,3 +33,4 @@ tint = Color( 1, 0, 0, 1 )
 material = SubResource( 3 )
 
 [node name="Hands" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.52085, 0 )
