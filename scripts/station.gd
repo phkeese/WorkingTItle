@@ -33,12 +33,16 @@ func _on_Area_body_entered(body: Node) -> void:
 	if body.is_in_group("myplayers"):
 		_in_range[body] = body
 		body.connect("interacted", self, "_on_interacted")
+		if body.is_network_master():
+			$HUD/VBoxContainer/Label2.visible_characters = -1
 
 
 func _on_Area_body_exited(body: Node) -> void:
 	if body.is_in_group("myplayers"):
 		_in_range.erase(body)
 		body.disconnect("interacted", self, "_on_interacted")
+		if body.is_network_master():
+			$HUD/VBoxContainer/Label2.visible_characters = 0
 
 
 func _on_interacted(by: Node, item: Node) -> void:
