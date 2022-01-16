@@ -48,6 +48,8 @@ func _set_angle(new_angle: float) -> void:
 	angle = clamp(new_angle, -max_angle, max_angle)
 	$CameraContainer.rotation_degrees = Vector3(-angle, 0.0, 0.0)
 	$CameraContainer/Camera.rotation_degrees.z = angle / 5.0
+	if is_equal_approx(abs(angle), max_angle):
+		rpc("game_over")
 
 
 func _set_height(new_height: float) -> void:
