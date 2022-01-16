@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://addons/multiplayer/Sync.gd" type="Script" id=2]
 [ext_resource path="res://assets/models/char_v1/char_v1.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/audio/classic_hurt.mp3" type="AudioStream" id=4]
 
 [sub_resource type="CapsuleShape" id=2]
 radius = 0.5
@@ -36,3 +37,6 @@ material = SubResource( 3 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.52085, 0 )
 
 [node name="Pointer" type="Position3D" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )

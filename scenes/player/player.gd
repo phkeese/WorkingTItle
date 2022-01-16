@@ -34,6 +34,7 @@ func _physics_process(delta: float) -> void:
 remotesync func kill():
 	if is_network_master():
 		global_transform.origin.y = -30
+		$AudioStreamPlayer.play()
 
 
 func _process(delta: float) -> void:
