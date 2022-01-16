@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://scenes/game/game.gd" type="Script" id=1]
 [ext_resource path="res://addons/multiplayer/NetworkGame.gd" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://assets/sprites/a490b0c1-47ef-405b-950b-88de941bfa08.__CR0,0,1500,1500_PT0_SX300_V1___.jpg" type="Texture" id=6]
 [ext_resource path="res://assets/themes/new_theme.tres" type="Theme" id=7]
 [ext_resource path="res://assets/sprites/flying-ship-airship-futuristic-ship-vector-clipart_csp81717309 (Custom).jpg" type="Texture" id=8]
+[ext_resource path="res://assets/audio/Fun in a Bottle.mp3" type="AudioStream" id=9]
 
 [sub_resource type="Curve" id=3]
 _data = [ Vector2( 0, 0 ), 0.0, 1.0, 0, 1, Vector2( 1, 1 ), 1.0, 0.0, 1, 0 ]
@@ -280,3 +281,8 @@ editable = false
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="game"]
 environment = SubResource( 9 )
+
+[node name="Music" type="AudioStreamPlayer" parent="game"]
+stream = ExtResource( 9 )
+autoplay = true
+bus = "Music"

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Fun in a Bottle.mp3-5b889ebdf0c0799dbdde560ec977b32f.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/Fun in a Bottle.mp3"
+dest_files=[ "res://.import/Fun in a Bottle.mp3-5b889ebdf0c0799dbdde560ec977b32f.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
