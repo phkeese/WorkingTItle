@@ -39,7 +39,8 @@ func _process(delta: float) -> void:
 	if speed <= 0.1:
 		self.height -= (1.0 - speed) / 10.0	
 	else:
-		self.height += 0.1
+#		self.height += 0.1
+		pass
 	self.game_time += delta
 
 
