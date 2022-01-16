@@ -16,9 +16,14 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	var center := Vector3.ZERO
+	var count := 0
 	for player in $Players.get_children():
-		center += player.global_transform.origin * Vector3(1.0, 0.0, 1.0)
-	center /= $Players.get_child_count()
+		var position := player.global_transform.origin as Vector3
+		if position.y < -1:
+			continue
+		center += position * Vector3(1.0, 0.0, 1.0)
+		count += 1
+	center /= count
 	$MeshInstance.global_transform.origin = center + Vector3.UP * 3.0
 	
 	var tip = clamp(center.z, -max_distance, max_distance) / max_distance

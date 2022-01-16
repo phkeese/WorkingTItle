@@ -26,6 +26,9 @@ func _physics_process(delta: float) -> void:
 	var movement := Vector3.RIGHT * right + Vector3.FORWARD * up + Vector3.DOWN * gravity
 	move_and_slide(movement * speed, Vector3.UP, true)
 	rpc("turn_towards", Vector3(right, 0, -up))
+	
+	if global_transform.origin.y <= -50:
+		global_transform.origin = Vector3.ZERO
 
 
 func _process(delta: float) -> void:
